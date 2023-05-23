@@ -36,22 +36,21 @@ class Agent:
         if isinstance(self.state, DancingState) and self.state.dances >= 3:
             self.state = RestingState()
             
-
-bee = Agent()
-
-world_model.x += bee.x
-world_model.y += bee.y
-
-environment = world_model.environment
-
-def update(frame):
-    world_model.x[-1] += 0.1
-    world_model.y[-1] += 0.1
-    environment.set_offsets(world_model.x, world_model.y)
+    def bee_movement(self):
     
-ani = animation.FuncAnimation(environment, update, frames=100, interval=100)
+        world_model.x += self.x
+        world_model.y += self.y
 
-plt.show()
+        environment = world_model.environment
+
+        def update():
+            world_model.x[-1] += 0.5
+            world_model.y[-1] += 0.5
+            environment.set_offsets(world_model.x, world_model.y)
+            
+        ani = animation.FuncAnimation(environment, update, frames=100, interval=100)
+
+        plt.show()
         
     
         
