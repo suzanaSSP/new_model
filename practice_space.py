@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import random
 
-x = []
-y = []
+x = 0
+y = 0
 
 for i in range(20):
     x.append(random.randint(0,50))
@@ -12,6 +12,6 @@ for i in range(20):
     plt.xlim(0,50)
     plt.ylim(0,50)
     plt.scatter(x,y)
-    plt.pause(0.001)
-    
+    plt.pause(0.1)
+
 plt.show()
