@@ -5,6 +5,16 @@ n_site = 15
 x = [random.randint(0,20) for _ in range(n_site)]
 y = [random.randint(0,20) for _ in range(n_site)]
 
+fig = plt.figure(figsize=(6,6), dpi=96)
+ax = plt.gca()
+
+while True:
+    plt.cla()
+    x = [random.randint(0,20) for _ in range(n_site)]
+    y = [random.randint(0,20) for _ in range(n_site)]
+    plt.scatter(x,y)
+    plt.pause(0.5)
+    
 environment = plt.scatter(x,y)
 
 plt.show()
