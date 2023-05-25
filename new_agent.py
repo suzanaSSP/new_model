@@ -1,15 +1,12 @@
 from new_states import RestingState, DancingState, ExploreState, AcessingState, THub
-import world_model
 import random
+import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
 
+     
 class Agent:
     def __init__(self):
         self.state = RestingState()
-        self.x = random.randint(0,20)
-        self.y = random.randint(0,20)
-            
         
     def transitions(self):
         if isinstance(self.state, RestingState):
@@ -35,26 +32,12 @@ class Agent:
             
         if isinstance(self.state, DancingState) and self.state.dances >= 3:
             self.state = RestingState()
-            
+  
  
 
-world_model.x += Agent.x
-world_model.y += Agent.y
-
-environment = world_model.environment
-
-def update():
-    world_model.x[-1] += 0.5
-    world_model.y[-1] += 0.5
-    environment.set_offsets(world_model.x, world_model.y)
-    
-ani = animation.FuncAnimation(environment, update, frames=100, interval=100)
-
-plt.show()
 
     
         
-            
                      
 # Questions: What is considered a good site? That will help me write -> if ____ : self.dances +=1
             # What is THub? Why do I have to go through it?

@@ -1,3 +1,5 @@
+import world_model
+
 class State:
     def __init__(self,color):
         self.color = color
@@ -10,7 +12,12 @@ class RestingState(State):
 class ExploreState(State):
     def __init__(self):
         super().__init__((253,218,13)) # Yellow
-        self.sites = 0
+        
+    def finding_site(self):
+        distance = world_model.x[0] - world_model.x[0:]
+        for i in range(world_model.num_steps):
+            if abs(distance) < 1:
+                print("Site near")
 
 class THub(ExploreState):
     def __init__(self):
@@ -25,6 +32,9 @@ class DancingState(State):
         super().__init__((255,0,255)) # Pink
         self.dances = 0
         
+        
+ExploreState.finding_site(ExploreState)
+
     
 
 

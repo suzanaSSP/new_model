@@ -1,22 +1,55 @@
 import matplotlib.pyplot as plt
+import numpy as np
 import random
 
-n_site = 15
-x = [random.randint(0,20) for _ in range(n_site)]
-y = [random.randint(0,20) for _ in range(n_site)]
-
-fig = plt.figure(figsize=(6,6), dpi=96)
-ax = plt.gca()
-
-while True:
-    plt.cla()
-    x = [random.randint(0,20) for _ in range(n_site)]
-    y = [random.randint(0,20) for _ in range(n_site)]
-    plt.scatter(x,y)
-    plt.pause(0.5)
+# Site coordinates and their values. The second value in the numpy array shows how much they value
+num_sites = 1
+site_x    = np.random.rand(num_sites, 2) * 50
+site_y    = np.random.rand(num_sites, 2) * 50
     
-environment = plt.scatter(x,y)
+#colors
+yellow = [255,255,0]
+black  = [0,0,0]
+white  = [255,255,255]
 
+# Agent's coordinates 
+num_agents = 1
+x = [25]
+y = [10]
+
+# Adding only the first item from the numpy array of the site's arrays to the x, y value list
+for list in site_x:
+    for i in list:
+        x.append(i)
+        
+for list in site_y:
+    for i in list:
+        y.append(i)
+
+# Plot figure
+fig, ax = plt.subplots()
+
+def update_simulation(step):
+    # Update positions based on velocities or any other rules
+    for i in range(num_agents):
+        x[i] += random.randint(-2,2)
+        y[i] += random.randint(-2,2)
+
+    # Clear the plot
+    ax.clear()
+    plt.xlim(0,50)
+    plt.ylim(0,50)
+    # Update the scatter plot with new positions
+    ax.scatter(x, y)
+
+    # Set a delay between frames if desired
+    plt.pause(0.1)
+
+# Amount of frames
+num_steps = 500
+for step in range(num_steps):
+    update_simulation(step)
+    
 plt.show()
 
 """
