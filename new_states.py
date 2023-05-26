@@ -1,23 +1,39 @@
-import world_model
+import world_model as wm
+from math import sqrt
 
 class State:
+    timer = 0
     def __init__(self,color):
         self.color = color
-        self.timer = 0
-  
+
 class RestingState(State):
     def __init__(self):
         super().__init__((30,144,255)) #Blue   
         
 class ExploreState(State):
+    site = 0
+
     def __init__(self):
-        super().__init__((253,218,13)) # Yellow
+        pass
         
+    # Adding one to the site count if site is good
     def finding_site(self):
-        distance = world_model.x[0] - world_model.x[0:]
-        for i in range(world_model.num_steps):
-            if abs(distance) < 1:
-                print("Site near")
+        
+        # Function to create a list with the location of a given site or agent
+        def finding_distance(point1, point2):
+            location = sqrt((wm.x[point2] - wm.x[point1])**2 + (wm.y[point2] - wm.y[point1])**2)
+            return location
+        
+        # If the site is greater than this number, it is good
+        value_of_good_site = 26
+        # Distance between agent and site
+        distance1 = abs(finding_distance(1,0))
+        distance2 = abs(finding_distance(2,0))
+        distance3 = abs(finding_distance(3,0))
+        
+        for i in range(wm.num_steps):
+            if distance1 < value_of_good_site or distance2 < value_of_good_site or distance3 < value_of_good_site:
+                self.site += 1
 
 class THub(ExploreState):
     def __init__(self):
@@ -28,12 +44,14 @@ class AcessingState(State):
         super().__init__((112,41,99)) # Red
         
 class DancingState(State):
+    dances = 0
     def __init__(self):
         super().__init__((255,0,255)) # Pink
-        self.dances = 0
         
+
+# Implement a search radius 
         
-ExploreState.finding_site(ExploreState)
+
 
     
 

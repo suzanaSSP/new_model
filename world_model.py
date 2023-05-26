@@ -3,7 +3,7 @@ import numpy as np
 import random
 
 # Site coordinates and their values. The second value in the numpy array shows how much they value
-num_sites = 1
+num_sites = 3
 site_x    = np.random.rand(num_sites, 2) * 50
 site_y    = np.random.rand(num_sites, 2) * 50
     
@@ -19,16 +19,15 @@ y = [10]
 
 # Adding only the first item from the numpy array of the site's arrays to the x, y value list
 for list in site_x:
-    for i in list:
-        x.append(i)
+    x.append(list[0])
         
 for list in site_y:
-    for i in list:
-        y.append(i)
+    y.append(list[0])
 
 # Plot figure
 fig, ax = plt.subplots()
-
+# Number of frames. This number will be used in the for loop of main.py and the for loop in Explore State
+num_steps = 100
 def update_simulation(step):
     # Update positions based on velocities or any other rules
     for i in range(num_agents):
@@ -41,16 +40,8 @@ def update_simulation(step):
     plt.ylim(0,50)
     # Update the scatter plot with new positions
     ax.scatter(x, y)
-
     # Set a delay between frames if desired
     plt.pause(0.1)
-
-# Amount of frames
-num_steps = 500
-for step in range(num_steps):
-    update_simulation(step)
-    
-plt.show()
 
 """
 import pygame

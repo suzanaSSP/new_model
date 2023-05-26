@@ -1,34 +1,32 @@
-from new_states import RestingState, DancingState, ExploreState, AcessingState, THub
-import random
+from new_states import RestingState, DancingState, ExploreState, AcessingState, THub, State
 import numpy as np
 import matplotlib.pyplot as plt
 
      
 class Agent:
+    state = ExploreState()
+    
     def __init__(self):
-        self.state = RestingState()
+        pass
         
     def transitions(self):
         if isinstance(self.state, RestingState):
-            if self.state.timer > 120:
-                self.state = ExploreState()
-                
             # If some bees are dancing, go straight to accessing state to access sites
             if DancingState.dances > 0:
                 self.state = AcessingState()
             
         if isinstance(self.state, ExploreState):
-            if self.state.site ==1:
+            if self.state.site > 1:
                 self.state = AcessingState()
                 
             # If you were exploring but didn't find anything, just rest
-            if self.state.timer > 120 and self.state.sites ==0:
+            if State.timer > 120 and self.state.site ==0:
                 self.state = THub()
             if isinstance(self.state, THub):
                 self.state = RestingState()
             
         if isinstance(self.state, AcessingState):
-            self.state = DancingState()
+            print("I'm in the accessing state!")
             
         if isinstance(self.state, DancingState) and self.state.dances >= 3:
             self.state = RestingState()
