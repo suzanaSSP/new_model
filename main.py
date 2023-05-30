@@ -2,11 +2,13 @@ import world_model
 from new_agent import Agent
 import matplotlib.pyplot as plt
 
+agent = Agent()
+
 for step in range(world_model.num_steps):
     world_model.update_simulation(step)
-    print(Agent.state)
+    print(agent.state)
     
-    Agent.transitions(Agent)
+    agent.transitions()
     
 plt.show()
     

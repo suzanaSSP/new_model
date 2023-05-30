@@ -4,11 +4,17 @@ import matplotlib.pyplot as plt
 
      
 class Agent:
-    state = ExploreState()
     
     def __init__(self):
-        pass
+        self.fov = 30.0
+        self.reading = []
+        self.num_sites = 3
+        self.sites   = np.random.rand(self.num_sites, 3) * 50
+        self.num_agents = 1
+        self.agents = np.random.rand(self.num_agents, 2) * 50
         
+        self.state = ExploreState()
+         
     def transitions(self):
         if isinstance(self.state, RestingState):
             # If some bees are dancing, go straight to accessing state to access sites
@@ -16,13 +22,13 @@ class Agent:
                 self.state = AcessingState()
             
         if isinstance(self.state, ExploreState):
-            if self.state.site > 1:
+            if len(self.reading) >= 1:
                 self.state = AcessingState()
                 
             # If you were exploring but didn't find anything, just rest
             if State.timer > 120 and self.state.site ==0:
                 self.state = THub()
-            if isinstance(self.state, THub):
+        if isinstance(self.state, THub):
                 self.state = RestingState()
             
         if isinstance(self.state, AcessingState):
@@ -30,7 +36,9 @@ class Agent:
             
         if isinstance(self.state, DancingState) and self.state.dances >= 3:
             self.state = RestingState()
-  
+    
+   
+                
  
 
 

@@ -1,4 +1,3 @@
-import world_model as wm
 from math import sqrt
 
 class State:
@@ -15,7 +14,8 @@ class ExploreState(State):
 
     def __init__(self):
         pass
-        
+     
+    """  
     # Adding one to the site count if site is good
     def finding_site(self):
         
@@ -34,7 +34,8 @@ class ExploreState(State):
         for i in range(wm.num_steps):
             if distance1 < value_of_good_site or distance2 < value_of_good_site or distance3 < value_of_good_site:
                 self.site += 1
-
+    """
+    
 class THub(ExploreState):
     def __init__(self):
         super().__init__(80, 80, 80) # Gray

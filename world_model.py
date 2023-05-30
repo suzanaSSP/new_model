@@ -1,28 +1,35 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import random
+from new_agent import Agent
+import math
 
-# Site coordinates and their values. The second value in the numpy array shows how much they value
-num_sites = 3
-site_x    = np.random.rand(num_sites, 2) * 50
-site_y    = np.random.rand(num_sites, 2) * 50
-    
-#colors
-yellow = [255,255,0]
-black  = [0,0,0]
-white  = [255,255,255]
-
-# Agent's coordinates 
-num_agents = 1
-x = [25]
-y = [10]
+agent = Agent()
 
 # Adding only the first item from the numpy array of the site's arrays to the x, y value list
-for list in site_x:
+x = []
+y = []
+
+# Adding the x, y values from the np array in new_agent for agents
+for list in agent.agents:
+    x.append(list[0])
+
+for list in agent.agents:
+    y.append(list[1])
+    
+# Adding the x, y values from the np array in new_agent for sites
+for list in agent.sites:
     x.append(list[0])
         
-for list in site_y:
-    y.append(list[0])
+for list in  agent.sites:
+    y.append(list[1])
+    
+def display(self):
+    for agent in agent.agents:
+        for site in agent.sites:
+            if math.dist(site[0:-1], agent[:]) <= agent.fov:
+                agent.reading.append(site)
+        agent.update(self.reading)
 
 # Plot figure
 fig, ax = plt.subplots()
@@ -30,7 +37,7 @@ fig, ax = plt.subplots()
 num_steps = 100
 def update_simulation(step):
     # Update positions based on velocities or any other rules
-    for i in range(num_agents):
+    for i in range(agent.num_agents):
         x[i] += random.randint(-2,2)
         y[i] += random.randint(-2,2)
 
@@ -42,6 +49,8 @@ def update_simulation(step):
     ax.scatter(x, y)
     # Set a delay between frames if desired
     plt.pause(0.1)
+    
+#Seperate the agents and sites to add color
 
 """
 import pygame
