@@ -2,26 +2,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import random
 from new_agent import Agent
+from sites import Site
 
 agent = Agent()
+site = Site()
 
-# Adding only the first item from the numpy array of the site's arrays to the x, y value list
-x = []
-y = []
+num_agents = 20
+num_sites = 20
 
-# Adding the x, y values from the np array in new_agent for agents
-for list in agent.agents:
-    x.append(list[0])
-
-for list in agent.agents:
-    y.append(list[1])
-    
-# Adding the x, y values from the np array in new_agent for sites
-for list in agent.sites:
-    x.append(list[0])
-        
-for list in  agent.sites:
-    y.append(list[1])
+agents = [agent(agent.x, agent.y) for _ in range(num_agents)]
+sites = [site(site.x, site.y) for _ in range(num_sites)]
     
 
 # Plot figure

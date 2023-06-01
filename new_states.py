@@ -1,7 +1,8 @@
-from math import sqrt
-import world_model as wm
+import math
+from new_agent import Agent
 
 class State:
+    agent = Agent()
     def __init__(self,color):
         self.color = color
 
@@ -18,20 +19,11 @@ class ExploreState(State):
     def finding_site(self):
         
         # Function to create a list with the location of a given site or agent
-        def finding_distance(point1, point2):
-            location = sqrt((wm.x[point2] - wm.x[point1])**2 + (wm.y[point2] - wm.y[point1])**2)
-            return location
-        
-        # If the site is greater than this number, it is good
-        value_of_good_site = 30
-        # Distance between agent and site
-        distance1 = abs(finding_distance(1,0))
-        distance2 = abs(finding_distance(2,0))
-        distance3 = abs(finding_distance(3,0))
-        
-        for i in range(wm.num_steps):
-            if distance1 < value_of_good_site or distance2 < value_of_good_site or distance3 < value_of_good_site:
-                self.site += 1
+         def finding_site(self):
+            for agent in agent.agents:
+                for site in self.sites:
+                    if math.dist(site[0:-1], agent[:]) <= self.fov:
+                        self.near_sites.append(site)
 
     
 class THub(ExploreState):

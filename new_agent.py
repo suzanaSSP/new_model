@@ -1,17 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+import random
      
 class Agent:
     
     def __init__(self):
         self.fov = 50
         self.reading = []
-        self.num_sites = 3
-        self.sites   = np.random.rand(self.num_sites, 3) * 50
-        self.num_agents = 4
-        self.agents = np.random.rand(self.num_agents, 2) * 50
-        
+        self.x = random.randint(0,20)
+        self.y = random.randint(0,20)
         
         self.state = ExploreState()
          
@@ -38,12 +36,6 @@ class Agent:
             self.state = RestingState()
             
         """
-            
-    def finding_site(self):
-        for agent in self.agents:
-            for site in self.sites:
-                if math.dist(site[0:-1], agent[:]) <= self.fov:
-                    self.near_sites.append(site)
        
 
 from new_states import ExploreState
