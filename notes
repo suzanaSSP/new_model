@@ -1,1 +1,3 @@
 Class agent has attributes for only one agent, then it's multiplied in the main file or when it's creating the world_model
+Site also have their own individual class, then are multiplied in the main file
+Create circles that are the site and add them to the plot. Then scatter the agents
