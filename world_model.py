@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import random
 from new_agent import Agent
-import math
 
 agent = Agent()
 

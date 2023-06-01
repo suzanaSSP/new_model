@@ -2,7 +2,6 @@ from math import sqrt
 import world_model as wm
 
 class State:
-    timer = 0
     def __init__(self,color):
         self.color = color
 
@@ -11,7 +10,6 @@ class RestingState(State):
         super().__init__((30,144,255)) #Blue   
         
 class ExploreState(State):
-    site = 0
 
     def __init__(self):
         pass
