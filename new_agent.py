@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 class Agent:
     
     def __init__(self):
-        self.fov = 30.0
+        self.fov = 50
         self.reading = []
         self.num_sites = 3
         self.sites   = np.random.rand(self.num_sites, 3) * 50
@@ -22,7 +22,8 @@ class Agent:
                 self.state = AcessingState()
             
         if isinstance(self.state, ExploreState):
-            if len(self.reading) >= 1:
+            self.state.finding_site()
+            if self.state.site >= 1:
                 self.state = AcessingState()
                 
             # If you were exploring but didn't find anything, just rest

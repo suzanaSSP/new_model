@@ -24,12 +24,6 @@ for list in agent.sites:
 for list in  agent.sites:
     y.append(list[1])
     
-def display(self):
-    for agent in agent.agents:
-        for site in agent.sites:
-            if math.dist(site[0:-1], agent[:]) <= agent.fov:
-                agent.reading.append(site)
-        agent.update(self.reading)
 
 # Plot figure
 fig, ax = plt.subplots()

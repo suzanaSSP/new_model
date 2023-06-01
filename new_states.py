@@ -1,4 +1,5 @@
 from math import sqrt
+import world_model as wm
 
 class State:
     timer = 0
@@ -15,7 +16,6 @@ class ExploreState(State):
     def __init__(self):
         pass
      
-    """  
     # Adding one to the site count if site is good
     def finding_site(self):
         
@@ -25,7 +25,7 @@ class ExploreState(State):
             return location
         
         # If the site is greater than this number, it is good
-        value_of_good_site = 26
+        value_of_good_site = 30
         # Distance between agent and site
         distance1 = abs(finding_distance(1,0))
         distance2 = abs(finding_distance(2,0))
@@ -34,7 +34,7 @@ class ExploreState(State):
         for i in range(wm.num_steps):
             if distance1 < value_of_good_site or distance2 < value_of_good_site or distance3 < value_of_good_site:
                 self.site += 1
-    """
+
     
 class THub(ExploreState):
     def __init__(self):
