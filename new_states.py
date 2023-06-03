@@ -1,47 +1,31 @@
 import math
 from new_agent import Agent
+from world_model import World
+import numpy as np
 
-class State:
-    agent = Agent()
-    def __init__(self,color):
-        self.color = color
+world = World()
+max_resting_time = 10
 
-class RestingState(State):
-    def __init__(self):
-        super().__init__((30,144,255)) #Blue   
-        
-class ExploreState(State):
-
-    def __init__(self):
-        pass
-     
-    # Adding one to the site count if site is good
-    def finding_site(self):
-        
-        # Function to create a list with the location of a given site or agent
-         def finding_site(self):
-            for agent in agent.agents:
-                for site in self.sites:
-                    if math.dist(site[0:-1], agent[:]) <= self.fov:
-                        self.near_sites.append(site)
-
+def resting_state(agent: Agent):
+    agent.clock += 1 
     
-class THub(ExploreState):
-    def __init__(self):
-        super().__init__(80, 80, 80) # Gray
-        
-class AcessingState(State):
-    def __init__(self):
-        super().__init__((112,41,99)) # Red
-        
-class DancingState(State):
-    dances = 0
-    def __init__(self):
-        super().__init__((255,0,255)) # Pink
-        
-
-# Implement a search radius 
-        
+    if np.random.rand() < agent.clock / max_resting_time:
+        agent.clock = 0
+        agent.state = explore_state
+      
+def explore_state(agent: Agent):
+    
+    value_of_near_site = 20
+    
+    sites = sorted(world.sites, key = lambda site : math.dist(site.location, agent.location))
+    closest_site = sites[0]
+    
+    if closest_site < value_of_near_site:
+        agent = acessing_state
+    
+def acessing_state(agent: Agent):
+    if isinstance(agent.state, acessing_state):
+        print("I'm in the accesing state!")
 
 
     

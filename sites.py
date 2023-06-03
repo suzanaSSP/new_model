@@ -1,8 +1,10 @@
 import random
 class Site:
-    def __init__(self):
-        self.x = random.randint(0,20)
-        self.y = random.randint(0,20)
-        
-        # If site is greater than a certain number, it's good
-        value_of_site = random.randint(0,10)
+    def __init__(self, x, y) -> None:
+        self.x = x
+        self.y = y
+
+class Foreign_Site(Site):
+    def __init__(self, x, y, quality) -> None:
+        super().__init__(x, y)
+        self.quality = quality

@@ -1,45 +1,70 @@
 import matplotlib.pyplot as plt
-import numpy as np
-import random
 from new_agent import Agent
 from sites import Site
+from world_model import World
+from typing import List
+import numpy as np
 
+AGENT_VELOCITY = 0.5    # velocity
+eta          = 0.6      # random fluctuation in angle (in radians)
+L            = 20       # size of world
+R            = 0.5      # interaction radius
+dt           = 0.1      # time step
+Nt           = 200      # number of time steps
+N            = 20       # number of agents
+MAX_QUALITY  = 250
+N_SITES      = 5       # number of sites
+S_RADIUS     = 0.2      # site radius
+
+agent : List[Agent] = []
+site  : List[Site] = []
+hub   : Site
+    
 def main():
-    agent = Agent()
-    site = Site()
-
-    num_agents = 20
-    num_sites = 20
-
-    agents = [agent(agent.x, agent.y) for _ in range(num_agents)]
-    sites = [site(site.x, site.y) for _ in range(num_sites)]
-        
-
     # Plot figure
-    fig, ax = plt.subplots()
-    # Number of frames. This number will be used in the for loop of main.py and the for loop in Explore State
-    num_steps = 100
+    fig = plt.figure(figsize=(L,L), dpi=96)
+    ax = plt.gca()
+    ax.set(xlim=(-1 , L + 1), ylim=(-1 , L + 1))
+    ax.set_aspect('equal')
+    
+    world = World()
+    
+    hub = Site(S_RADIUS + np.random.rand()*(L - S_RADIUS), S_RADIUS + np.random.rand()*(L - S_RADIUS)) # Size of circle for hub, point where agents will leave
+    # Adding hub to the animation
+    hub_dot = plt.Circle((hub.x, hub.y), S_RADIUS, color ='red',  alpha=0.5)
+    # Adding hub to the World object
+    world.hub = hub
+    
+    sites = [Site(S_RADIUS + np.random.rand()* (L-S_RADIUS), S_RADIUS + np.random.rand()* (L-S_RADIUS)) for _ in range(N_SITES)]
+    
+    world.sites = sites
+    
+    agents = [Agent(hub.x, hub.y) for _ in range(N)]
 
+    agents = [Agent(hub.x, hub.y) for _ in range(N)] 
+    world.agents = agents    
+   
     while True:
+          
+        for agent in agents:
+            agent.state()
+            
+        # Clear the plot
+        plt.cla()
+        
+        ax.add_artist(hub_dot)
         
         for site in sites:
-            circle = plt.Circle((site.x, site.y), radius=0.2, color='black')
-            ax.add_patch(circle)
-            ax.set_aspect('equal')
+            circle = plt.Circle((site.x, site.y), S_RADIUS, color='black',alpha=0.5)
+            ax.add_artist(circle)
             
-        # Update positions based on velocities or any other rules
-        for agent in agents:
-            ax.scatter(agent.x, agent.y)
-
-        # Clear the plot
-        ax.clear()
-        plt.xlim(0,50)
-        plt.ylim(0,50)
-        # Update the scatter plot with new positions
-        ax.scatter(agent.x, agent.y)
-        # Set a delay between frames if desired
-        plt.pause(0.1)
-
+        for agent in world.agents:
+            plt.scatter(agent.x, agent.y, color = agent.color)
+            
+        ax.set(xlim=(0,L), ylim=(0,L))
+        ax.set_aspect('equal')
+        plt.pause(0.01)
+        
 if __name__ == '__main__':
     main()
     
