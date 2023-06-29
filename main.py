@@ -5,15 +5,15 @@ from world_model import World
 from typing import List
 import numpy as np
 
-AGENT_VELOCITY = 0.5    # velocity
+AGENT_VELOCITY = 0.7    # velocity
 eta          = 0.6      # random fluctuation in angle (in radians)
 L            = 20       # size of world
 R            = 0.5      # interaction radius
 dt           = 0.1      # time step
 Nt           = 200      # number of time steps
-N            = 20       # number of agents
+N            = 15       # number of agents
 MAX_QUALITY  = 250
-N_SITES      = 5       # number of sites
+N_SITES      = 10       # number of sites
 S_RADIUS     = 0.2      # site radius
 
 agent : List[Agent] = []
@@ -63,7 +63,7 @@ def main():
             
         ax.set(xlim=(0,L), ylim=(0,L))
         ax.set_aspect('equal')
-        plt.pause(0.01)
+        plt.pause(0.0001)
         
 if __name__ == '__main__':
     main()
